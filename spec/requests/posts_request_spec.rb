@@ -6,35 +6,32 @@ RSpec.describe "Posts", type: :request do
 		end
 
 		describe "GET /posts/new" do
-			# Given - Set the system into a specific state
-			# When - Action is taken
-			# Then - Result should be
-
-			# Arrange - The system into a specific state
-			# Act - Perform an action
-			# Assert - The result
-
-			it "returns a 200 status code" do
+      it "returns a 200 status code" do
 				get new_post_path
 				expect(response).to be_successful
 			end
 
       it "should render the new.html.erb template with a form" do
-				# Given - Set the system into a specific state
-
-				# When - Action is taken
         get new_post_path
-				
-				# Then - Result should be
 				expect(response).to render_template('posts/new')
-				expect(response).to render_template('posts/_form')
       end
 		end
 
 		context "with valid parameters" do
 			describe "POST /posts" do
-				pending "it returns a 201 status code"
-				pending "it redirects to show page"
+				it "creates a Post" do
+					expect {
+						params = { post: { title: "Test Title", body: "Test body" } }
+						post posts_path(params)
+					}.to change(Post, :count).by(1)
+				end
+
+        it "it redirects to show page" do
+          params = { post: { title: "Test Title", body: "Test body" } }
+            
+          post posts_path(params)
+          expect(response).to redirect_to post_path assigns(:post)
+        end
 			end
 		end
 
