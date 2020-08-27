@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
-		describe "GET /posts" do
-			pending "write test code for the #index request"
-		end
+		# describe "GET /posts" do
+		# 	pending "write test code for the #index request"
+		# end
 
 		describe "GET /posts/new" do
       it "returns a 200 status code" do
@@ -17,33 +17,46 @@ RSpec.describe "Posts", type: :request do
       end
 		end
 
-		context "with valid parameters" do
-			describe "POST /posts" do
-				it "creates a Post" do
-					expect {
+		describe "POST /posts" do
+			context "as a logged in user" do
+				#@@@@ HOW CAN I TEST IF USER SIGNED IN????
+				# before(:each) do
+				# 	@user = User.create username: "endy", email: "testuser@wearesnook.com", password: "supersecure"
+				# 	sign_in @user
+				# end
+				context "with valid parameters" do
+					it "creates a Post" do
+						expect {
+							params = { post: { title: "Test Title", body: "Test body" } }
+							post posts_path(params)
+						}.to change(Post, :count).by(1)
+					end
+
+					it "it redirects to show page" do
 						params = { post: { title: "Test Title", body: "Test body" } }
+							
 						post posts_path(params)
-					}.to change(Post, :count).by(1)
+						expect(response).to redirect_to post_path assigns(:post)
+					end
 				end
 
-        it "it redirects to show page" do
-          params = { post: { title: "Test Title", body: "Test body" } }
-            
-          post posts_path(params)
-          expect(response).to redirect_to post_path assigns(:post)
-        end
-			end
-		end
-
-		context "with invalid parameters" do
-			describe "POST /posts" do
-				pending "it returns a 400 status code"
-				pending "it redirects to new page"
+				context "with invalid parameters" do
+					it "returns a 400 status code" do
+						params = { post: { title: "", body: "" } }
+						post posts_path(params)
+						#@@@@ I'M GETTING A 200. NEED TO WORK ON IT
+						expect(response.status).to eq(400)
+						expect(response).to redirect_to new_post_path
+					end
+				end
 			end
 		end
 
 		describe "GET /posts/:id" do
-			pending "it returns a 200 status code"
-			pending "it should render the show.html.erb template"
+			it "returns a 200 status code" do
+				params = { post: { id: 1 } }
+				get posts_path(params)
+				expect(response.status).to eq(200)
+			end
 		end
 end
