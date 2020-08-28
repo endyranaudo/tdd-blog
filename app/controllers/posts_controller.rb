@@ -10,6 +10,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    byebug
+    @user.posts.build!(params)
 
     if @post.save
       redirect_to @post
