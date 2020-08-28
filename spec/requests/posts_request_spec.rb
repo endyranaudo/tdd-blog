@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
-		# describe "GET /posts" do
-		# 	pending "write test code for the #index request"
-		# end
+		describe "GET /posts" do
+			it "shold get #INDEX" do
+				get posts_path
+				expect(response).to be_successful
+			end
+		end
 
 		describe "GET /posts/new" do
       it "returns a 200 status code" do
