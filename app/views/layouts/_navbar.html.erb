@@ -1,16 +1,20 @@
-<nav class="navbar-nav bg-dark text-white pt-4 pb-4">
-      <div class="mx-4">
+<nav class="bg-dark text-white pt-4 pb-4">
+      <div class="mx-4 d-flex">
+
         <div>
-          <%= link_to 'BLOG TDD APP', root_path, :class => 'text-white' %>
-          <ul class="d-flex p-0">
-            <li class="nav-item list-unstyled mr-2">
-              <%= link_to 'Create a post', new_post_path, :class => 'navbar-link' %> |
-            </li>
-            <li class="nav-item list-unstyled mr-2">
-              <%= link_to 'My posts', new_post_path , :class => 'navbar-link' %> |
-            </li>
-          </ul>
+          <%= link_to 'BLOG TDD APP', root_path, :class => 'text-white ', :id => 'logo' %>
+          <% if user_signed_in? %>
+            <ul class="d-flex p-0">
+                <li class="nav-item list-unstyled mr-2">
+                  <%= link_to 'Create a post', new_post_path, :class => 'navbar-link' %> |
+                </li>
+                <li class="nav-item list-unstyled mr-2">
+                  <%= link_to 'My profile', user_path(current_user.id) , :class => 'navbar-link' %> |
+                </li>
+            </ul>
+          <% end %>
         <div>
+        
         <div class="navbar-text">
           <% if user_signed_in? %>
             Logged in as <strong><%= current_user.email %></strong>.
@@ -25,9 +29,9 @@
             </div>
           <% end %>
         </div>
-          <div>
-            <p class="notice text-danger p-0"><%= notice %></p>
-            <p class="alert text-danger p-0"><%= alert %></p>
-          </div>
+      </div>
+      <div>
+        <p class="notice text-danger p-0"><%= notice %></p>
+        <p class="alert text-danger p-0"><%= alert %></p>
       </div>
     </nav>

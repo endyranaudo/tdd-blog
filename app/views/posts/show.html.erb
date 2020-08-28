@@ -7,5 +7,12 @@
   <div>
     <p><%= @post.body %><p>
   </div>
-  <button type="button" class="btn btn-primary text-white mt-4"><%= link_to 'Back to Posts', posts_path, :class => 'text-white' %></button>
+  <div>
+    <% if @post.user_id == current_user.id %>    
+      <button type="button" class="btn btn-primary text-white mt-4"><%= link_to 'Edit post', edit_post_path, :class => 'text-white' %></button>
+    <% end %>
+  </div>
+  <div>
+    <button type="button" class="btn btn-secondary text-white mt-4"><%= link_to 'Back to Posts', posts_path, :class => 'text-white' %></button>
+  </div>
 </section>
