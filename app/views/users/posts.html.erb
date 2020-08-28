@@ -1,1 +1,14 @@
 <h1>All user's posts here </h1>
+
+<% @user.posts.each  do |post| %>
+  <div class="card bg-light mb-2">
+    <div class="p-2">
+      <div>
+        <p class="mb-0"><%= link_to post.title, post %></p>
+      </div>
+      <div>
+        <%= post.body %>
+      </div>
+    </div>
+  </div>
+<% end %>

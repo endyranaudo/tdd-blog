@@ -12,6 +12,8 @@
                   <%= link_to 'My profile', user_path(current_user.id) , :class => 'navbar-link' %> |
                 </li>
             </ul>
+          <% else %>
+          <p>Welcome! Please if you want to post an article</p>
           <% end %>
         <div>
         

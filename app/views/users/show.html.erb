@@ -5,8 +5,13 @@
     <p><%= @user.email %></p>
     <h4>Number of posts</h4>
     <p><%= @user.posts.count %></p>
+    <div class="mb-4">
+      <%= link_to "SEE ALL POSTS", :user_posts %>
+    </div>
     <% if current_user.id == @user.id %>
-      <%= link_to 'Edit profile', edit_user_registration_path, :type => "button",:class => 'btn btn-primary' %>
+      <div>
+        <%= link_to 'Edit profile', edit_user_registration_path, :type => "button",:class => 'btn btn-primary' %>
+      </div>
     <% end %>
   </div>
 </section>
