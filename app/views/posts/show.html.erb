@@ -1,10 +1,11 @@
-<h1>POST</h1>
+<div>Written by: <strong><%= @post.user.email %></strong></div>
 
-<section>
+<section class="mt-4">
   <div>
-    <%= @post.title %>
+    <h3><%= @post.title %></h3>
   </div>
   <div>
-  <%= @post.body %>
+    <p><%= @post.body %><p>
   </div>
+  <button type="button" class="btn btn-primary text-white mt-4"><%= link_to 'Back to Posts', posts_path, :class => 'text-white' %></button>
 </section>

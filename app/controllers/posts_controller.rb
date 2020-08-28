@@ -9,9 +9,9 @@ class PostsController < ApplicationController
   end
 
   def create
+    # byebug
     @post = Post.new(post_params)
-    byebug
-    @user.posts.build!(params)
+    @post.user_id = current_user.id
 
     if @post.save
       redirect_to @post
