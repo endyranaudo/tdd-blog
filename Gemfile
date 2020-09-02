@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
   gem 'capybara'
+  gem 'devise'
 end
 
 group :development do
