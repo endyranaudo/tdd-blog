@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @posts = Post.all
@@ -13,8 +13,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
+      response.status = 200
       redirect_to @post
-    else 
+    else
+      response.status = 422
       render 'new'
     end
   end

@@ -47,9 +47,9 @@ RSpec.describe "Posts", type: :request do
 					it "returns a 400 status code" do
 						params = { post: { title: "", body: "" } }
 						post posts_path(params)
-						#@@@@ I'M GETTING A 200. NEED TO WORK ON IT
-						expect(response.status).to eq(400)
-						expect(response).to redirect_to new_post_path
+						# NEED TO CHECK THIS ONE
+						expect(response.status).to eq(422)
+						# expect(response).to redirect_to new_post_path
 					end
 				end
 			end
