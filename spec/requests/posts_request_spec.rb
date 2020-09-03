@@ -44,12 +44,12 @@ RSpec.describe "Posts", type: :request do
 				end
 
 				context "with invalid parameters" do
-					it "returns a 400 status code" do
+					it "returns a 302 status code - redirect" do
 						params = { post: { title: "", body: "" } }
 						post posts_path(params)
 						# NEED TO CHECK THIS ONE
 						expect(response.status).to eq(302)
-						# expect(response).to redirect_to new_post_path
+						expect(response).to redirect_to root_path
 					end
 				end
 			end
