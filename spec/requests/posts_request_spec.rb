@@ -48,7 +48,7 @@ RSpec.describe "Posts", type: :request do
 						params = { post: { title: "", body: "" } }
 						post posts_path(params)
 						# NEED TO CHECK THIS ONE
-						expect(response.status).to eq(422)
+						expect(response.status).to eq(302)
 						# expect(response).to redirect_to new_post_path
 					end
 				end

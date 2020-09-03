@@ -16,8 +16,8 @@ class PostsController < ApplicationController
       response.status = 200
       redirect_to @post
     else
-      response.status = 422
-      render 'new'
+      # response.status = 302
+      redirect_to root_url
     end
   end
 
