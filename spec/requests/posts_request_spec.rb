@@ -22,11 +22,12 @@ RSpec.describe "Posts", type: :request do
 
 		describe "POST /posts" do
 			context "as a logged in user" do
-				#@@@@ HOW CAN I TEST IF USER SIGNED IN????
+				# #@@@@ HOW CAN I TEST IF USER SIGNED IN????
 				# before(:each) do
-				# 	@user = User.create username: "endy", email: "testuser@wearesnook.com", password: "supersecure"
+				# 	@user = User.create username: "endy", email: "endy@wearesnook.com", password: "password"
 				# 	sign_in @user
 				# end
+
 				context "with valid parameters" do
 					it "creates a Post" do
 						expect {

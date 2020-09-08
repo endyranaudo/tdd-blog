@@ -66,6 +66,10 @@ RSpec.configure do |config|
   # Include Devise helpers for testing authentication
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
-  # config.include Devise::Test::IntegrationHelpers, type: :feature
-  # config.include Devise::Test::ControllerHelpers, type: :request
+  
+  # config.include Devise::Test::IntegrationHelpers, type: :controller
+  # config.include AuthenticationHelpers::Controller, type: :controller
+  # config.include AuthenticationHelpers::Feature, type: :feature
+
+
 end
