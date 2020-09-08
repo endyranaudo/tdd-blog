@@ -9,20 +9,39 @@ RSpec.describe "Posts", type: :request do
 		end
 
 		describe "GET /posts/new" do
-      it "returns a 200 status code" do
-				get new_post_path
-				expect(response).to be_successful
+			context "as a logged in user" do
+				before(:each) do
+					@user = User.create username: "endy", email: "endy@wearesnook.com", password: "password"
+					sign_in @user
+				end
+
+				it "returns a 200 status code" do
+					get new_post_path
+					expect(response).to be_successful
+				end
+				it "should render the new.html.erb template with a form" do
+					get new_post_path
+					expect(response).to render_template('posts/new')
+				end
 			end
 
-      it "should render the new.html.erb template with a form" do
-        get new_post_path
-				expect(response).to render_template('posts/new')
-      end
+			context "as logged out user" do
+				before(:each) do
+					@user = User.create username: "endy", email: "endy@wearesnook.com", password: "password"
+					sign_out @user
+				end
+
+				it "should redirect the user to the sign in page" do
+					get new_post_path
+					expect(response.status).to eq(302)
+					expect(response.status).to redirect_to(new_user_session_url)
+				end
+			end
+	
 		end
 
 		describe "POST /posts" do
 			context "as a logged in user" do
-				#@@@@ HOW CAN I TEST IF USER SIGNED IN????
 				before(:each) do
 					@user = User.create username: "endy", email: "endy@wearesnook.com", password: "password"
 					sign_in @user
@@ -48,9 +67,8 @@ RSpec.describe "Posts", type: :request do
 					it "returns a 302 status code - redirect" do
 						params = { post: { title: "", body: "" } }
 						post posts_path(params)
-						# NEED TO CHECK THIS ONE
 						expect(response.status).to eq(302)
-						expect(response).to redirect_to root_path
+						# expect(response).to redirect_to new_user_session_url
 					end
 				end
 			end

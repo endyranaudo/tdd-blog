@@ -66,6 +66,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # Include Devise helpers for testing authentication
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
