@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show]
   resources :posts
+
+  get 'users/:id/posts' => 'users#posts', :as => :user_posts
+
 end
