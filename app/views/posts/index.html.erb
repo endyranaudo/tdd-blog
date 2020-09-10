@@ -1,0 +1,17 @@
+<% content_for :page_title,  "Index" %>
+<h1>TDD-Blog</h1>
+<% @posts.each do |post| %>
+  <div class="card bg-light mb-2">
+    <div class="p-2">
+      <div>
+        <p class="mb-0"><%= link_to post.title, post %></p>
+      </div>
+      <div class="mb-3">
+        <p class="font-italic"><small>written by: <%= post.user.email %></small></p>
+      </div>
+      <div>
+        <%= post.body %>
+      </div>
+    </div>
+  </div>
+<% end %>
