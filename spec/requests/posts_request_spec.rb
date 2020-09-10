@@ -69,7 +69,6 @@ RSpec.describe "Posts", type: :request do
 					params = { post: { title: "", body: "" } }
 					post posts_path(params)
 					expect(response.status).to eq(302)
-					# expect(response).to redirect_to new_user_session_url
 				end
 			end
 		end
@@ -99,7 +98,7 @@ RSpec.describe "Posts", type: :request do
 			end
 		end
 
-		context "if the post you are attempting to edit has been created by a different user" do
+		context "if logged user tries to edit a post that has been created by a different user" do
 			before(:each) do
 				@user_one = User.create id: 1, username: "endy", email: "endy@wearesnook.com", password: "password"
 				sign_in @user_one
@@ -116,7 +115,6 @@ RSpec.describe "Posts", type: :request do
 			end
 			
 		end
-		
 		
 	end
 
