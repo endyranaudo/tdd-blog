@@ -41,7 +41,6 @@ class PostsController < ApplicationController
       @post.update(post_params)
       redirect_to @post
     else
-      flash[:alert] = "You cannot edit/delete other users' post"
       redirect_to root_url
     end
   end
