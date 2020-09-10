@@ -29,7 +29,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])  
     if @post.user == current_user
       render "edit"
-
     else
       redirect_to root_url
     end
@@ -46,16 +45,15 @@ class PostsController < ApplicationController
   end
 
 
-  # def destroy
-  #   @post = Post.find(params[:id])
-  #   if current_user.id == @post.user_id
-  #     @post.destroy
-  #     redirect_to posts_path
-  #   else
-  #     flash[:alert] = "You cannot edit/delete other users' post"
-  #     redirect_to posts_path
-  #   end
-  # end
+  def destroy
+    @post = Post.find(params[:id])
+    if current_user.id == @post.user_id
+      @post.destroy
+      redirect_to posts_path
+    else
+      redirect_to posts_path
+    end
+  end
 
   
   private 

@@ -10,7 +10,7 @@ RSpec.feature "Auth", type: :feature do
     fill_in "user_email", with: "endy@wearesnook.com"
     fill_in "user_password", with: "password"
     click_button "Log in"
-    expect(page).to have_content "TDD-Blog"
+    expect(page).to have_content "All posts"
   end
 
   scenario "signing in with wrong email and/or password" do

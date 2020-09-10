@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
   # IS IT THAT REDUNDANT???
   authenticated :user do
-    resources :posts, only: [:new, :create, :edit, :update, :destroy]
+    resources :posts, only: [:new, :create, :edit, :update, :destroy ]
   end
   
   resources :users, only: [:index, :show]

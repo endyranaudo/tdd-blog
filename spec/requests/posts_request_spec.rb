@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "Posts", type: :request do
 		
 	describe "GET /posts" do
-			it "shold get #INDEX" do
-				get posts_path
-				expect(response).to be_successful
-			end
+		it "shold get #INDEX" do
+			get posts_path
+			expect(response).to be_successful
 		end
+	end
 
 	describe "GET /posts/new" do
 		context "as a logged in user" do
@@ -83,7 +83,6 @@ RSpec.describe "Posts", type: :request do
 	end
 
 	describe "GET /posts/:id/edit" do
-
 		context "if user created the post" do
 			before(:each) do
 				@user = User.create id: 1, username: "endy", email: "endy@wearesnook.com", password: "password"
@@ -113,9 +112,39 @@ RSpec.describe "Posts", type: :request do
 				get edit_post_path(params)
 				expect(response).to redirect_to root_url
 			end
-			
+		end	
+	end
+
+	describe "DELETE /posts/:id" do
+		context "logged user creates a post and tries to delete it" do
+			before(:each) do
+				@user = User.create id: 1, username: "endy", email: "endy@wearesnook.com", password: "password"
+				sign_in @user
+				@post = Post.create title: "Post title", body: "This post has some content", user_id: 1
+			end
+			it "can delete its own posts" do
+				params = { id: 1 }
+				delete post_path(params)
+				expect(response).to redirect_to posts_path
+			end
+		end
+
+		context "logged user tries to delete a post he didn't create" do
+			before(:each) do
+				@user_one = User.create id: 1, username: "endy", email: "endy@wearesnook.com", password: "password"
+				sign_in @user_one
+				@post = Post.create id:1, title:"Post title", body: "This post has some content", user_id: 1
+				sign_out @user_one
+				@user_two = User.create id: 2, username: "fran", email: "fran@wearesnook.com", password: "password"
+				sign_in @user_two
+			end
+			it "cannot delete other users' posts" do
+				params = { id: 1 }
+				delete post_path(params)
+				expect(response).to redirect_to posts_path
+			end
 		end
 		
 	end
-
+	
 end
