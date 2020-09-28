@@ -1,4 +1,4 @@
-<div>Written by: <strong><%= @post.user.email %></strong></div>
+<div>Written by: <strong><%= link_to @post.user.email, user_posts_path %></strong></div>
 
 <section class="mt-4">
   <div>
@@ -11,7 +11,7 @@
     <% if user_signed_in? %>  
       <% if @post.user_id == current_user.id %>    
         <button type="button" class="btn btn-primary text-white mt-4"><%= link_to 'Edit post', edit_post_path, :class => 'text-white' %></button>
-        <button type="button" class="btn btn-danger text-white mt-4"><%= link_to 'Delete post', @post, method: :delete, :class => 'text-white' %></button>
+        <button type="button" class="btn btn-danger text-white mt-4"><%= link_to 'Delete post', @post, method: :delete, data: {confirm: "Are you sure?"}, :class => 'text-white' %></button>
       <% end %>
     <% end %>
   </div>
